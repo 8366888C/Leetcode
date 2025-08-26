@@ -11,8 +11,8 @@ class Solution:
         # Hashmap
         store = {}
         for index, value in enumerate(nums):
-            complement = target - value
-            if complement in store:
-                return [store[complement], index]
+            _ = target - value
+            if _ in store:
+                return [store[_], index]
             store[value] = index
         return []
