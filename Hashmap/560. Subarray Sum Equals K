@@ -1,0 +1,22 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        # Brute Force
+        count = 0
+        for i in range(len(nums)):
+            curr_sum = 0
+            for j in range(i, len(nums)):
+                curr_sum += nums[j]
+                if curr_sum == k:
+                    count += 1
+        return count
+
+        # Hashmap
+        count = 0
+        curr_sum = 0
+        store = {0:1}
+        for num in nums:
+            curr_sum += num
+            if curr_sum - k in store:
+                count += store[curr_sum - k]
+            store[curr_sum] = store.get(curr_sum, 0) + 1
+        return count
