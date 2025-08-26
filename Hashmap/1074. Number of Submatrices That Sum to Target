@@ -1,0 +1,33 @@
+class Solution:
+    def numSubmatrixSumTarget(self, matrix: List[List[int]], target: int) -> int:
+        # Brute Force
+        rows, columns = len(matrix), len(matrix[0])
+        count = 0
+        for r1 in range(rows):
+            for c1 in range(columns):
+                for r2 in range(r1, rows):
+                    for c2 in range(c1, columns):
+                        sum = 0
+                        for i in range(r1, r2+1):
+                            for j in range(c1, c2+1):
+                                sum += matrix[i][j]
+                        if sum == target:
+                            count += 1
+        return count
+
+        # Hashmap
+        rows, columns = len(matrix), len(matrix[0])
+        count = 0
+        for r1 in range(rows):
+            col_sum = [0] * columns
+            for r2 in range(r1, rows):
+                for c in range(columns):
+                    col_sum[c] += matrix[r2][c]
+                curr_sum = 0
+                store = {0:1} # curr_sum : count
+                for sum in col_sum:
+                    curr_sum += sum
+                    if curr_sum - target in store:
+                        count += store[curr_sum - target]
+                    store[curr_sum] = store.get(curr_sum, 0) + 1
+        return count
