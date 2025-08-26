@@ -10,8 +10,7 @@ class Solution:
         # Hashmap
         store = {}
         for index, value in enumerate(nums):
-            _ = value
-            if _ in store:
+            if value in store:
                 return True
             store[value] = index
         return False
