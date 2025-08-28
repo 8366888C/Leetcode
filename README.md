@@ -1,8 +1,8 @@
 # Leetcode
 
 <details>
-<summary><a href="https://github.com/8366888C/Leetcode/tree/main/Arrays%20and%20Hashing">Arrays and Hashing</a></summary>
-&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:green" href="https://github.com/8366888C/Leetcode/blob/main/Arrays%20and%20Hashing/217.%20Contains%20Duplicate">217. Contains Duplicate</a>
+<summary><b><span style="font-size:22px;"><a href="https://leetcode.com/problem-list/vxa8b6i5/">Arrays and Hashing</a></span></b></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green"><a href="https://leetcode.com/problems/contains-duplicate/">217. Contains Duplicate</a></span>
 </details>
 <div align="center">
 
