@@ -1,20 +1,20 @@
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        # Brute Force O(n^2)
+        # Brute Force O(n^2) : n-number of integers
         for i in range(len(nums)):
             for j in range(i+1, len(nums)):
                 if nums[i] == nums[j]:
                     return True
         return False
 
-        # Sorting O(nlogn)
+        # Sorting O(nlogn) : n-number of integers
         nums.sort()
         for i in range(1, len(nums)):
             if nums[i-1] == nums[i]:
                 return True
         return False
 
-        # Hashmap O(n)
+        # Hashmap O(n) : n-number of integers
         map = {} # value : index
         for i in range(len(nums)):
             if nums[i] in map:
@@ -22,5 +22,5 @@ class Solution:
             map[nums[i]] = i
         return False
 
-        # Set O(n)
+        # Set O(n) : n-number of integers
         return len(set(nums)) < len(nums)
