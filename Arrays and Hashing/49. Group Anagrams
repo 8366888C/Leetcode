@@ -1,0 +1,39 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # Brute Force O(n^2 * klogk) : n-number of words, k-length of word
+        output = []
+        map = set()
+        for i, s in enumerate(strs):
+            if i in map:
+                continue
+            anagram = [s]
+            map.add(i)
+            for j, t in enumerate(strs):
+                if j in map:
+                    continue
+                if sorted(s) == sorted(t):
+                    anagram.append(t)
+                    map.add(j)
+            output.append(anagram)
+        return output
+
+        # Sorting O(n * klogk) : n-number of words, k-length of word
+        map = {}
+        for s in strs:
+            ssort = "".join(sorted(s))
+            if ssort not in map:
+                map[ssort] = []
+            map[ssort].append(s)
+        return list(map.values())
+
+        # Hashmap O(n * k) : n-number of words, k-length of word
+        map = {}
+        for s in strs:
+            count = [0] * 26
+            for c in s:
+                count[ord(c) - ord("a")] += 1
+            key = tuple(count)
+            if key not in map:
+                map[key] = []
+            map[key].append(s)
+        return list(map.values())
