@@ -1,6 +1,6 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        # Sorting O(nlogn + mlogm) : n-number of words(s) m-number of words(t)
+        # Sorting O(nlogn + mlogm) : n-length of string(s), m-length of string(t)
         if len(s) != len(t):
             return False
         return sorted(s) == sorted(t)
