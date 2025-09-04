@@ -1,0 +1,27 @@
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        # Brute Force O(n^2) : n-length of array
+        output = [0] * len(nums)
+        for i in range(len(nums)):
+            prod = 1
+            for j in range(len(nums)):
+                if i == j:
+                    continue
+                prod *= nums[j]
+            output[i] = prod
+        return output
+
+        # Hashmap O(n) : n-length of array
+        prod, zero = 1, 0
+        output = [0] * len(nums)
+        for num in nums:
+            if num:
+                prod *= num
+            else:
+                zero += 1
+        if zero > 1:
+            return output
+        for i in range(len(nums)):
+            if zero: output[i] = 0 if nums[i] else prod
+            else: output[i] = prod // nums[i]
+        return output
