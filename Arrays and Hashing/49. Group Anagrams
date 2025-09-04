@@ -1,6 +1,6 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        # Brute Force O(n^2 * klogk) : n-number of words, k-length of word
+        # Brute Force O(n^2 * klogk) : n-length of array, k-length of subarray
         output = []
         map = set() # index
         for i, s in enumerate(strs):
@@ -17,16 +17,16 @@ class Solution:
             output.append(anagram)
         return output
 
-        # Sorting O(n * klogk) : n-number of words, k-length of word
-        map = {} # ssort : [s]
+        # Sorting O(n * klogk) : n-length of array, k-length of subarray
+        map = {} # key : [s]
         for s in strs:
-            ssort = "".join(sorted(s))
-            if ssort not in map:
-                map[ssort] = []
-            map[ssort].append(s)
+            key = "".join(sorted(s))
+            if key not in map:
+                map[key] = []
+            map[key].append(s)
         return list(map.values())
 
-        # Hashmap O(n * k) : n-number of words, k-length of word
+        # Hashmap O(n * k) : n-length of array, k-length of subarray
         map = {} # key : [s]
         for s in strs:
             characters = [0] * 26
