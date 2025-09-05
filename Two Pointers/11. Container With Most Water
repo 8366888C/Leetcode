@@ -1,0 +1,8 @@
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        # Brute Force O(n^2) : n-length of array
+        output = 0
+        for i in range(len(height)):
+            for j in range(i+1, len(height)):
+                output = max(output, min(height[i], height[j]) * (j-i))
+        return output
