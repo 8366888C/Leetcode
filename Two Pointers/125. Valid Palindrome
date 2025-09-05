@@ -1,10 +1,10 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        # Reverse O(n)
+        # Reverse O(n) : length of array
         clean = "".join(c.lower() for c in s if c.isalnum())
         return clean == clean[::-1]
 
-        # Two Pointers O(n)
+        # Two Pointers O(n) : length of array
         l, r = 0, len(s) - 1
         while l < r:
             if not s[l].isalnum():
