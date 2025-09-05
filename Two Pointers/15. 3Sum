@@ -1,0 +1,54 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # Brute Force O(n^3) : n-length of array
+        nums.sort()
+        output = set()
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                for k in range(j+1, len(nums)):
+                    if nums[i] + nums[j] + nums[k] == 0:
+                        output.add(tuple([nums[i], nums[j], nums[k]]))
+        return [list(o) for o in output]
+
+        # Hashmap O(n^2) : n-length of array
+        nums.sort()
+        map = {} # value : count
+        for num in nums:
+            map[num] = map.get(num, 0) + 1
+        output = []
+        for i in range(len(nums)):
+            map[nums[i]] = map.get(nums[i], 0) - 1
+            if i and nums[i] == nums[i-1]:
+                continue
+            for j in range(i+1, len(nums)):
+                map[nums[j]] = map.get(nums[j], 0) - 1
+                if j-1 > i and nums[j] == nums[j-1]:
+                    continue
+                target = -(nums[i] + nums[j])
+                if map.get(target, 0) > 0:
+                    output.append([nums[i], nums[j], target])
+            for j in range(i+1, len(nums)):
+                map[nums[j]] = map.get(nums[j], 0) + 1
+        return output
+
+        # Two Pointers O(n^2) : n-length of array
+        nums.sort()
+        output = []
+        for i in range(len(nums)):
+            if nums[i] > 0:
+                break
+            if i and nums[i] == nums[i-1]:
+                continue
+            l, r = i+1, len(nums)-1
+            total = nums[l] + nums[r] + nums[i]
+            while l < r:
+                if total < 0:
+                    l += 1
+                elif total > 0:
+                    r -= 1
+                else:
+                    output.append([nums[l], nums[r], nums[i]])
+                    l, r = l+1, r-1
+                    while l < r and nums[l] == nums[l-1]:
+                        l += 1
+        return output
