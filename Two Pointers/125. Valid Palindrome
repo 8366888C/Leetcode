@@ -5,7 +5,7 @@ class Solution:
         return clean == clean[::-1]
 
         # Two Pointers O(n) : length of array
-        l, r = 0, len(s) - 1
+        l, r = 0, len(s)-1
         while l < r:
             if not s[l].isalnum():
                 l += 1
