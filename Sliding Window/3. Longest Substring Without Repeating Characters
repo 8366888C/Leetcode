@@ -1,0 +1,12 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        # Brute Force O(n^2) : n-length of array
+        output = 0
+        for i in range(len(s)):
+            map = set()
+            for j in range(i, len(s)):
+                if s[j] in map:
+                    break
+                map.add(s[j])
+            output = max(output, len(map))
+        return output
