@@ -1,0 +1,40 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        # Brute Force O(n^2) : n-length of array
+        output = 0
+        for i in range(len(s)):
+            count, map = 0, {} # value : count
+            for j in range(i, len(s)):
+                map[s[j]] = map.get(s[j], 0) + 1
+                count = max(count, map[s[j]])
+                if (j-i+1) - count <= k:
+                    output = max(output, j-i+1)
+        return output
+
+        # Sliding Window O(n * m) : n-length of array, m-length of unique array
+        output = 0
+        map = set(s)
+        for c in map:
+            l = count = 0
+            for r in range(len(s)):
+                if s[r] == c:
+                    count += 1
+                while (r-l+1) - count > k:
+                    if s[l] == c:
+                        count -= 1
+                    l += 1
+                output = max(output, r-l+1)
+        return output
+
+        # Sliding Window O(n) : n-length of array
+        output = 0
+        map = {} # value : count
+        l = count = 0
+        for r in range(len(s)):
+            map[s[r]] = map.get(s[r], 0) + 1
+            count = max(count, map[s[r]])
+            if (r-l+1) - count > k:
+                map[s[l]] -= 1
+                l += 1
+            output = max(output, r-l+1)
+        return output
