@@ -10,3 +10,26 @@ class Solution:
                 map.add(s[j])
             output = max(output, len(map))
         return output
+
+        # Sliding Window O(n) : n-length of array
+        output = 0
+        map = set()
+        l = 0
+        for r in range(len(s)):
+            while s[r] in map:
+                map.remove(s[l])
+                l += 1
+            map.add(s[r])
+            output = max(output, r-l+1)
+        return output
+
+        # # Sliding Window O(n) : n-length of array
+        output = 0
+        map = {}
+        l = 0
+        for r in range(len(s)):
+            if s[r] in map:
+                l = max(map[s[r]] + 1, l)
+            map[s[r]] = r
+            output = max(output, r-l+1)
+        return output
