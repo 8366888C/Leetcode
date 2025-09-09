@@ -1,0 +1,20 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        # Brute Force O(n^2) : n-length of array
+        while "()" in s or "{}" in s or "[]" in s:
+            s = s.replace("()", "")
+            s = s.replace("{}", "")
+            s = s.replace("[]", "")
+        return s == ""
+
+        # Stack O(n) : n-length of array
+        stack = deque()
+        map = {")":"(", "]":"[", "}":"{"}
+        for c in s:
+            if c not in map:
+                stack.append(c)
+            elif stack and stack[-1] == map[c]:
+                stack.pop()
+            else:
+                return False
+        return not stack
