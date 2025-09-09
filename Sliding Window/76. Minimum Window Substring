@@ -1,25 +1,31 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         # Sliding Window O(n + m) : n-length of array, m-length of unique array
-        if t == "":
-            return ""
+        if t == "": return ""
         smap, tmap = {}, {} # value : count
         for c in t:
+            # store counts of letters in the "t" string
             tmap[c] = tmap.get(c, 0) + 1
         have, need = 0, len(tmap)
-        output, len_output = [-1, -1], float("infinity")
         l = 0
+        output, len_output = [-1, -1], float("infinity")
         for r in range(len(s)):
+            # store counts of letters in the "s" string
             smap[s[r]] = smap.get(s[r], 0) + 1
+            # check if letter and count of the letter is same in both the strings
             if s[r] in tmap and smap[s[r]] == tmap[s[r]]:
                 have += 1
+            # minimize the window
             while have == need:
+                # storing the output if length of window is less than the previous one
                 if r-l+1 < len_output:
                     output = [l, r]
                     len_output = r-l+1
+                # popping the left letter out of the window and incrementing the left index
                 smap[s[l]] -= 1
                 if s[l] in tmap and smap[s[l]] < tmap[s[l]]:
                     have -= 1
                 l += 1
+        # displaying the output
         l, r = output
         return s[l:r+1] if len_output != float("infinity") else ""
