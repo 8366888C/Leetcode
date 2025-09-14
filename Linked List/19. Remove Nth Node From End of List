@@ -17,3 +17,15 @@ class Solution:
         prev = nodes[idx - 1]
         nodes[idx-1].next = nodes[idx].next
         return head
+
+        # Two Pointers O(n) : n-length of array
+        dummy = ListNode(0, head)
+        l, r = dummy, head
+        while n > 0:
+            r = r.next
+            n -= 1
+        while r:
+            l = l.next
+            r = r.next
+        l.next = l.next.next
+        return dummy.next
