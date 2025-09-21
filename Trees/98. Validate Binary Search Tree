@@ -6,15 +6,6 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        # Recursion O(n) : n-length of array
-        def isValidBT(root, left, right):
-            if not root:
-                return True
-            if not left < root.val < right:
-                return False
-            return isValidBT(root.left, left, root.val) and isValidBT(root.right, root.val, right)
-        return isValidBT(root, -float("infinity"), float("infinity"))
-
         # Queue O(n) : n-length of array
         if not root: return True
         queue = deque()
@@ -28,3 +19,12 @@ class Solution:
             if node.right:
                 queue.append([node.right, node.val, right])
         return True
+
+        # Recursion O(n) : n-length of array
+        def isValidBT(root, left, right):
+            if not root:
+                return True
+            if not left < root.val < right:
+                return False
+            return isValidBT(root.left, left, root.val) and isValidBT(root.right, root.val, right)
+        return isValidBT(root, -float("infinity"), float("infinity"))
