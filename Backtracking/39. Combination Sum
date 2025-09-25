@@ -1,0 +1,14 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        output = []
+        def decision(i, curr, total):
+            if total == target:
+                output.append(curr.copy())
+                return
+            if i >= len(candidates) or total > target: return
+            curr.append(candidates[i])
+            decision(i, curr, total + candidates[i])
+            curr.pop()
+            decision(i+1, curr, total)
+        decision(0, [], 0)
+        return output
